@@ -1,3 +1,6 @@
+import {AppThunkType} from "../../../main/bll/store";
+import {searchAPI} from "../dal/searchApi";
+
 const initState = {
   results: [] as SearchResultType[],
 };
@@ -17,6 +20,11 @@ export const searchReducer = (state: SearchInitStateType = initState, action: Se
 
 export const setSearchResults = (results: SearchResultType[]) =>
   ({type: "search/SET-SEARCH-RESULTS", results} as const);
+
+export const getSearchResults = (): AppThunkType => (dispatch) => {
+  const results = searchAPI.getSearchResults();
+  dispatch(setSearchResults(results));
+};
 
 export type SearchInitStateType = typeof initState;
 export type SearchActionsType = ReturnType<typeof setSearchResults>;

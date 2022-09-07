@@ -1,10 +1,8 @@
 import {FC} from "react";
-import {useSelector} from "react-redux";
-import {AppStateType} from "../../../main/bll/store";
-import {SearchResultType} from "../bll/searchReducer";
+import {useAppSelector} from "../../../main/bll/store";
 
 export const Search: FC = () => {
-  const results = useSelector<AppStateType, SearchResultType[]>(state => state.search.results);
+  const results = useAppSelector(state => state.search.results);
 
   return (
     <div>

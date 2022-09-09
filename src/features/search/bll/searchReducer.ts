@@ -1,8 +1,8 @@
 import {AppThunkType} from "../../../main/bll/store";
-import {searchAPI} from "../dal/searchApi";
+import {GetSearchResultsParamsType, searchAPI, VolumeType} from "../dal/searchApi";
 
 const initState = {
-  results: [] as SearchResultType[],
+  results: [] as VolumeType[],
 };
 
 export const searchReducer = (state: SearchInitStateType = initState, action: SearchActionsType): SearchInitStateType => {
@@ -18,20 +18,16 @@ export const searchReducer = (state: SearchInitStateType = initState, action: Se
   }
 };
 
-export const setSearchResults = (results: SearchResultType[]) =>
+export const setSearchResults = (results: VolumeType[]) =>
   ({type: "search/SET-SEARCH-RESULTS", results} as const);
 
-export const getSearchResults = (): AppThunkType => (dispatch) => {
-  const results = searchAPI.getSearchResults();
-  dispatch(setSearchResults(results));
+export const getSearchResults = (params: GetSearchResultsParamsType): AppThunkType => (dispatch) => {
+  searchAPI.getSearchResults(params).then((response) => {
+    if (response.data.totalItems !== 0) {
+      dispatch(setSearchResults(response.data.items));
+    }
+  });
 };
 
 export type SearchInitStateType = typeof initState;
 export type SearchActionsType = ReturnType<typeof setSearchResults>;
-export type SearchResultType = {
-  id: number
-  title: string
-  imageUrl: string
-  category: string
-  authors: string[]
-};

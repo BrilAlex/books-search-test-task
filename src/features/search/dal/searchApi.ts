@@ -1,10 +1,48 @@
+import {instance} from "../../../main/dal/instance";
+
 export const searchAPI = {
-  getSearchResults () {
-    return [
-      {id: 1, title: "Some title 1", imageUrl: "", category: "", authors: ["Author 1", "Author 2"]},
-      {id: 2, title: "Some title 2", imageUrl: "", category: "", authors: ["Author"]},
-      {id: 3, title: "Some title 3", imageUrl: "", category: "", authors: ["Author"]},
-      {id: 4, title: "Some title 4", imageUrl: "", category: "", authors: ["Author 1", "Author 2"]},
-    ];
+  getSearchResults(params: GetSearchResultsParamsType) {
+    const qParam = `${params.title}${params.category !== "all" ? `+subject:${params.category}` : ""}`;
+    const queryParams = {
+      q: qParam,
+      orderBy: params.orderBy,
+    };
+    return instance.get<GetSearchResultsResponseType>(
+      "volumes",
+      {params: {...queryParams, key: "AIzaSyD-2JphujQms2y-fIfaSeuMybXP4ahaCuQ"}},
+    );
   },
+};
+
+export const categories = ["all", "art", "biography", "computers", "history", "medical", "poetry"];
+export const orderBy = ["relevance" , "newest"];
+
+export type VolumeType = {
+  kind: string
+  id: string
+  volumeInfo: {
+    title: string
+    authors: string[]
+    description: string
+    categories: string[]
+    imageLinks: {
+      smallThumbnail: string
+      thumbnail: string
+      small: string
+      medium: string
+      large: string
+    }
+  }
+};
+
+export type GetSearchResultsParamsType = {
+  title: string
+  category: string
+  orderBy: string
+};
+
+type GetSearchResultsResponseType = {
+  kind: string
+  items: VolumeType[]
+  totalItems: number
 };

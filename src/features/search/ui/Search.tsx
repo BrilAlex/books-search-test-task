@@ -10,12 +10,14 @@ export const Search: FC = () => {
       <div>
         {
           results.map(r => {
+            const {title, authors, categories, imageLinks} = r.volumeInfo;
+
             return (
               <div key={r.id}>
-                <img src={r.imageUrl} alt={r.title}/>
-                <p>{r.category}</p>
-                <h3>{r.title}</h3>
-                <p>{r.authors.join(", ")}</p>
+                <img src={imageLinks.thumbnail} alt={title}/>
+                <p>{categories[0]}</p>
+                <h3>{title}</h3>
+                <p>{authors.join(", ")}</p>
               </div>
             );
           })

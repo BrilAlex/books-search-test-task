@@ -2,6 +2,7 @@ import {FC, useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "../../../main/bll/store";
 import {useParams} from "react-router-dom";
 import {getBook} from "../bll/bookReducer";
+import s from "./Book.module.css";
 
 export const Book: FC = () => {
   const {id} = useParams<"id">();
@@ -14,15 +15,15 @@ export const Book: FC = () => {
 
   return (
     book ?
-      <div>
-        <div>
+      <div className={s.container}>
+        <div className={s.image}>
           <img src={book.volumeInfo.imageLinks.thumbnail} alt={book.volumeInfo.title}/>
         </div>
-        <div>
-          <p>{book.volumeInfo.mainCategory}</p>
+        <div className={s.info}>
+          <p className={s.category}>{book.volumeInfo.mainCategory}</p>
           <h1>{book.volumeInfo.title}</h1>
-          <p>{book.volumeInfo.authors.join(", ")}</p>
-          <p>{book.volumeInfo.description}</p>
+          <p className={s.authors}>{book.volumeInfo.authors.join(", ")}</p>
+          <p className={s.description}>{book.volumeInfo.description}</p>
         </div>
       </div>
       :

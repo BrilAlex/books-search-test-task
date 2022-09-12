@@ -1,0 +1,35 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 12px;
+}
+
+.image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    padding: 10px;
+    background-color: darkgray;
+}
+.image img {
+    max-width: 100%;
+}
+.info {
+    padding: 20px;
+}
+.category {
+    margin-bottom: 25px;
+}
+.info h1 {
+    margin-bottom: 15px;
+}
+.authors {
+    margin-bottom: 20px;
+}
+.description {
+    padding: 10px;
+    border: 1px solid darkgray;
+}

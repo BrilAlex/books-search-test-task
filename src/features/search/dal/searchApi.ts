@@ -8,6 +8,7 @@ export const searchAPI = {
       q: qParam,
       orderBy: params.orderBy,
     };
+
     return instance.get<GetSearchResultsResponseType>(
       "volumes",
       {params: {...queryParams, key: "AIzaSyD-2JphujQms2y-fIfaSeuMybXP4ahaCuQ"}},

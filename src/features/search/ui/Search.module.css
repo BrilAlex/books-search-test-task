@@ -1,0 +1,46 @@
+.container {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 12px;
+}
+
+.resultsCount {
+    margin-bottom: 20px;
+    padding: 10px;
+    text-align: center;
+}
+
+.searchResults {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.searchResults .navLink {
+    color: inherit;
+    text-decoration: none;
+}
+
+.searchResult {
+    width: 320px;
+    padding: 10px;
+    background: darkgray;
+}
+
+.image {
+    text-align: center;
+    height: 250px;
+}
+
+.image img {
+    max-width: 100%;
+}
+
+.searchResult .category {
+    margin-bottom: 15px;
+}
+
+.searchResult h3 {
+    margin-bottom: 10px;
+}

@@ -4,6 +4,7 @@ import {getSearchResults} from "../../../../features/search/bll/searchReducer";
 import {PATH} from "../pages/Pages";
 import {useAppDispatch} from "../../../bll/store";
 import {categories, orderBy} from "../../../../features/search/dal/searchApi";
+import s from "./Header.module.css";
 
 export const Header: FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -36,25 +37,27 @@ export const Header: FC = () => {
   };
 
   return (
-    <div>
-      <h1>Search for books</h1>
-      <input
-        value={searchQuery}
-        onChange={changeSearchQuery}
-        onKeyPress={enterKayHandler}
-      />
-      <button onClick={sendSearchQuery}>Search</button>
-      <div>
-        <span>Categories</span>
-        <select onChange={changeCategory}>
-          {categories.map((c, i) => <option key={c + "-" + i} value={c}>{c}</option>)}
-        </select>
-      </div>
-      <div>
-        <span>Sorting by</span>
-        <select onChange={changeOrderBy}>
-          {orderBy.map((o, i) => <option key={o + "-" + i} value={o}>{o}</option>)}
-        </select>
+    <div className={s.header}>
+      <div className={s.container}>
+        <h2>Search for books</h2>
+        <div className={s.searchBlock}>
+          <input
+            value={searchQuery}
+            onChange={changeSearchQuery}
+            onKeyPress={enterKayHandler}
+          />
+          <button onClick={sendSearchQuery}>Search</button>
+        </div>
+        <div className={s.filtersBlock}>
+          <span>Categories</span>
+          <select onChange={changeCategory}>
+            {categories.map((c, i) => <option key={c + "-" + i} value={c}>{c}</option>)}
+          </select>
+          <span>Sorting by</span>
+          <select onChange={changeOrderBy}>
+            {orderBy.map((o, i) => <option key={o + "-" + i} value={o}>{o}</option>)}
+          </select>
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 import {AppThunkType} from "../../../main/bll/store";
-import {GetSearchResultsParamsType, searchAPI, VolumeType} from "../dal/searchApi";
+import {GetSearchResultsParamsType, searchAPI} from "../dal/searchApi";
+import {VolumeType} from "../../../main/dal/types";
 
 const initState = {
   results: [] as VolumeType[],

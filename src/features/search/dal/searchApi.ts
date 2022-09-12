@@ -1,4 +1,5 @@
 import {instance} from "../../../main/dal/instance";
+import {VolumeType} from "../../../main/dal/types";
 
 export const searchAPI = {
   getSearchResults(params: GetSearchResultsParamsType) {
@@ -15,25 +16,7 @@ export const searchAPI = {
 };
 
 export const categories = ["all", "art", "biography", "computers", "history", "medical", "poetry"];
-export const orderBy = ["relevance" , "newest"];
-
-export type VolumeType = {
-  kind: string
-  id: string
-  volumeInfo: {
-    title: string
-    authors: string[]
-    description: string
-    categories: string[]
-    imageLinks: {
-      smallThumbnail: string
-      thumbnail: string
-      small: string
-      medium: string
-      large: string
-    }
-  }
-};
+export const orderBy = ["relevance", "newest"];
 
 export type GetSearchResultsParamsType = {
   title: string
@@ -41,7 +24,7 @@ export type GetSearchResultsParamsType = {
   orderBy: string
 };
 
-type GetSearchResultsResponseType = {
+export type GetSearchResultsResponseType = {
   kind: string
   items: VolumeType[]
   totalItems: number

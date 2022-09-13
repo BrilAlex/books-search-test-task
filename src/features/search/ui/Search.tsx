@@ -1,11 +1,20 @@
 import {FC} from "react";
-import {useAppSelector} from "../../../main/bll/store";
+import {useAppDispatch, useAppSelector} from "../../../main/bll/store";
 import {NavLink} from "react-router-dom";
 import {PATH} from "../../../main/ui/main/pages/Pages";
 import s from "./Search.module.css";
+import {loadMoreResults} from "../bll/searchReducer";
 
 export const Search: FC = () => {
   const results = useAppSelector(state => state.search.results);
+  const startIndex = useAppSelector(state => state.search.searchParams.startIndex);
+  const maxResults = useAppSelector(state => state.search.searchParams.maxResults);
+  const totalResults = useAppSelector(state => state.search.totalResults);
+  const dispatch = useAppDispatch();
+
+  const loadMoreHandler = () => {
+    dispatch(loadMoreResults(startIndex + maxResults + 1));
+  };
 
   return (
     <div className={s.container}>
@@ -30,6 +39,12 @@ export const Search: FC = () => {
           })
         }
       </div>
+      {
+        results.length < totalResults &&
+        <div className={s.loadMore}>
+          <button onClick={loadMoreHandler}>Load more</button>
+        </div>
+      }
     </div>
   );
 };

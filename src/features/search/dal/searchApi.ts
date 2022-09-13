@@ -3,11 +3,9 @@ import {VolumeType} from "../../../main/dal/types";
 
 export const searchAPI = {
   getSearchResults(params: GetSearchResultsParamsType) {
-    const qParam = `${params.title}${params.category !== "all" ? `+subject:${params.category}` : ""}`;
-    const queryParams = {
-      q: qParam,
-      orderBy: params.orderBy,
-    };
+    const {title, category, orderBy, startIndex, maxResults} = params;
+    const qParam = `${title}${category !== "all" ? `+subject:${category}` : ""}`;
+    const queryParams = {q: qParam, orderBy, startIndex, maxResults};
 
     return instance.get<GetSearchResultsResponseType>(
       "volumes",
@@ -16,13 +14,12 @@ export const searchAPI = {
   },
 };
 
-export const categories = ["all", "art", "biography", "computers", "history", "medical", "poetry"];
-export const orderBy = ["relevance", "newest"];
-
 export type GetSearchResultsParamsType = {
   title: string
   category: string
   orderBy: string
+  startIndex: number
+  maxResults: number
 };
 
 export type GetSearchResultsResponseType = {

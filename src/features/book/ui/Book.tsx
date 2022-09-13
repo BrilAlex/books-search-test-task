@@ -1,7 +1,7 @@
 import {FC, useEffect} from "react";
 import {useAppDispatch, useAppSelector} from "../../../main/bll/store";
 import {useParams} from "react-router-dom";
-import {getBook} from "../bll/bookReducer";
+import {getBook, setBook} from "../bll/bookReducer";
 import s from "./Book.module.css";
 
 export const Book: FC = () => {
@@ -11,6 +11,10 @@ export const Book: FC = () => {
 
   useEffect(() => {
     dispatch(getBook(id!));
+
+    return () => {
+      dispatch(setBook(null));
+    }
   }, []);
 
   return (

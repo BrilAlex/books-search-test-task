@@ -17,7 +17,7 @@ export const bookReducer = (state:BookInitStateType = initState, action: BookAct
   }
 };
 
-export const setBook = (volume: VolumeType) => ({type: "book/SET-BOOK", volume} as const);
+export const setBook = (volume: VolumeType | null) => ({type: "book/SET-BOOK", volume} as const);
 
 export const getBook = (id: string): AppThunkType => (dispatch) => {
   bookAPI.getBook(id)

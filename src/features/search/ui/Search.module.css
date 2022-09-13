@@ -44,3 +44,11 @@
 .searchResult h3 {
     margin-bottom: 10px;
 }
+
+.loadMore {
+    text-align: center;
+}
+
+.loadMore button {
+    padding: 10px 15px;
+}
